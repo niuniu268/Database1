@@ -29,7 +29,9 @@ Foreign keys: {actornr} (from ACTORS), {filmnr} (from FILM)
 
 # Specificera följande frågor mot databasen i figuren ovan med hjälp av relationsalgebra:
 
-1. 
+1. Ge en lista på de kurser (namn, nummer) som ger mer än 3 poäng
+
+$\Pi _{CourseName, CourseNumber} (\sigma _{CreditHours > 3} (COURSE))$
 
 ```
 SELECT CourseName, CourseNumber
@@ -37,15 +39,26 @@ FROM COURSE
 WHERE CreditHours > 3;
 ```
 
-2. 
+2. Ge en lista på de kurser (nummer) som gavs hösten 98
 
+$ \Pi _{CourseNumber} (\sigma _{Semester = 'Fall' \cap Year = 98} (SECTION))$
 ```
 SELECT CourseNumber
 FROM SECTION
 WHERE Semester = 'Fall' AND Year = 98;
 ```
 
-3. 
+3. Ge en lista på de studenter (namn, betyg) som har gått kursen ”Data
+Structures”
+
+$\Pi _{s.Name, g.Grade} (
+    \sigma _{c.CourseName = 'Data Structures'} (
+        (STUDENT ⨝ _{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT) 
+        ⨝ _{gr.SectionIdentifier=sec.SectionIdentifier} SECTION 
+        ⨝ _{sec.CourseNumber=c.CourseNumber} COURSE
+    )
+)$
+
 
 ```
 SELECT s.Name, g.Grade
@@ -56,7 +69,16 @@ JOIN COURSE c ON sec.CourseNumber = c.CourseNumber
 WHERE c.CourseName = 'Data Structures';
 ```
 
-4.
+4. Ge en lista på de studenter (studentnamn, kursnr) som har gått någon
+kurs antingen hösten 98 eller våren 99
+
+$ \Pi _{s.Name, sec.CourseNumber} (
+    \sigma _{(sec.Semester = 'Fall' \cap sec.Year = 98)}(SECTION) \cup \sigma _{(sec.Semester = 'Spring' \cap sec.Year = 99)}(SECTION)) ⨝ (
+        (STUDENT ⨝ _{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT)
+        ⨝ _{gr.SectionIdentifier=sec.SectionIdentifier} SECTION
+    )
+)$
+
 
 ```
 SELECT s.Name AS StudentName, sec.CourseNumber
@@ -83,11 +105,11 @@ WHERE parts.PNAME = 'Cam' AND parts.CITY = 'London';
 13. Where do suppliers in London get bolts from?
 
 ```
-SELECT DISTINCT suppliers.SNR
+SELECT DISTINCT suppliers.CITY
 FROM suppliers
 JOIN shipments ON suppliers.SNR = shipments.SNR
 JOIN parts ON shipments.PNR = parts.PNR
-WHERE parts.PNAME = 'Bolt' AND parts.CITY != 'London';
+WHERE parts.PNAME = 'Bolt' AND suppliers.CITY != 'London';
 
 ```
 ![image2](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-08%20at%2016.09.39.png?raw=true)
@@ -106,10 +128,10 @@ WHERE suppliers.SNAME = 'Jones';
 
 ```
 SELECT DISTINCT parts.COLOR
-FROM suppliers
-JOIN shipments ON suppliers.SNR = shipments.SNR
-JOIN parts ON shipments.PNR = parts.PNR
-WHERE suppliers.SNR = 'Smith';
+FROM parts
+JOIN shipments ON parts.PNR = shipments.PNR
+JOIN suppliers ON shipments.SNR = suppliers.SNR
+WHERE suppliers.SNAME = 'Smith';
 ```
 ![image4](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-08%20at%2016.20.34.png?raw=true)
 
