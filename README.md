@@ -31,6 +31,8 @@ Foreign keys: {actornr} (from ACTORS), {filmnr} (from FILM)
 
 1. Ge en lista på de kurser (namn, nummer) som ger mer än 3 poäng
 
+![image13]()
+
 $\Pi _{CourseName, CourseNumber} (\sigma _{CreditHours > 3} (COURSE))$
 
 ```
@@ -61,6 +63,7 @@ $$
 \Big)
 $$
 
+![image11](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.16.17.png?raw=true)
 
 ```
 SELECT s.Name, g.Grade
@@ -82,6 +85,8 @@ $$
     \big)
 \Big)
 $$
+
+![image12](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.16.24.png?raw=true)
 
 
 ```
