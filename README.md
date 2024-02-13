@@ -51,13 +51,15 @@ WHERE Semester = 'Fall' AND Year = 98;
 3. Ge en lista på de studenter (namn, betyg) som har gått kursen ”Data
 Structures”
 
-$\Pi _{s.Name, g.Grade} (
-    \sigma _{c.CourseName = 'Data Structures'} (
-        (STUDENT ⨝ _{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT) 
-        ⨝ _{gr.SectionIdentifier=sec.SectionIdentifier} SECTION 
-        ⨝ _{sec.CourseNumber=c.CourseNumber} COURSE
-    )
-)$
+$$
+\Pi_{s.Name, g.Grade} \Big(
+    \sigma_{c.CourseName = 'Data Structures'} \big(
+        (STUDENT \bowtie_{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT) \\
+        \bowtie_{gr.SectionIdentifier=sec.SectionIdentifier} SECTION \\
+        \bowtie_{sec.CourseNumber=c.CourseNumber} COURSE
+    \big)
+\Big)
+$$
 
 
 ```
@@ -72,12 +74,14 @@ WHERE c.CourseName = 'Data Structures';
 4. Ge en lista på de studenter (studentnamn, kursnr) som har gått någon
 kurs antingen hösten 98 eller våren 99
 
-$\Pi _{s.Name, sec.CourseNumber} (
-    \sigma _{(sec.Semester = 'Fall' \cap sec.Year = 98)}(SECTION) \cup \sigma _{(sec.Semester = 'Spring' \cap sec.Year = 99)}(SECTION)) ⨝ (
-        (STUDENT ⨝ _{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT)
-        ⨝ _{gr.SectionIdentifier=sec.SectionIdentifier} SECTION
-    )
-)$
+$$
+\Pi_{s.Name, sec.CourseNumber} \Big(
+    \sigma_{(sec.Semester = 'Fall' \cap sec.Year = 98) \lor (sec.Semester = 'Spring' \cap sec.Year = 99)} \Big(
+        (STUDENT \bowtie_{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT)
+        \bowtie_{gr.SectionIdentifier=sec.SectionIdentifier} SECTION
+    \Big)
+\Big)
+$$
 
 
 ```
