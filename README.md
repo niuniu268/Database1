@@ -76,10 +76,10 @@ kurs antingen hösten 98 eller våren 99
 
 $$
 \Pi_{s.Name, sec.CourseNumber} \Big(
-    \sigma_{(sec.Semester = 'Fall' \cap sec.Year = 98) \lor (sec.Semester = 'Spring' \cap sec.Year = 99)} \Big(
+    \sigma_{(sec.Semester = 'Fall' \cap sec.Year = 98) \cup (sec.Semester = 'Spring' \cap sec.Year = 99)} \big(
         (STUDENT \bowtie_{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT)
         \bowtie_{gr.SectionIdentifier=sec.SectionIdentifier} SECTION
-    \Big)
+    \big)
 \Big)
 $$
 
