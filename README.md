@@ -41,7 +41,7 @@ WHERE CreditHours > 3;
 
 2. Ge en lista på de kurser (nummer) som gavs hösten 98
 
-$ \Pi _{CourseNumber} (\sigma _{Semester = 'Fall' \cap Year = 98} (SECTION))$
+$\Pi _{CourseNumber} (\sigma _{Semester = 'Fall' \cap Year = 98} (SECTION))$
 ```
 SELECT CourseNumber
 FROM SECTION
@@ -72,7 +72,7 @@ WHERE c.CourseName = 'Data Structures';
 4. Ge en lista på de studenter (studentnamn, kursnr) som har gått någon
 kurs antingen hösten 98 eller våren 99
 
-$ \Pi _{s.Name, sec.CourseNumber} (
+$\Pi _{s.Name, sec.CourseNumber} (
     \sigma _{(sec.Semester = 'Fall' \cap sec.Year = 98)}(SECTION) \cup \sigma _{(sec.Semester = 'Spring' \cap sec.Year = 99)}(SECTION)) ⨝ (
         (STUDENT ⨝ _{s.StudentNumber=gr.StudentNumber} GRADE\_REPORT)
         ⨝ _{gr.SectionIdentifier=sec.SectionIdentifier} SECTION
@@ -112,7 +112,7 @@ JOIN parts ON shipments.PNR = parts.PNR
 WHERE parts.PNAME = 'Bolt' AND suppliers.CITY != 'London';
 
 ```
-![image2](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-08%20at%2016.09.39.png?raw=true)
+![image2](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.00.21.png?raw=true)
 
 14. What is the total quantity of parts supplied by Jones?
 
@@ -133,7 +133,7 @@ JOIN shipments ON parts.PNR = shipments.PNR
 JOIN suppliers ON shipments.SNR = suppliers.SNR
 WHERE suppliers.SNAME = 'Smith';
 ```
-![image4](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-08%20at%2016.20.34.png?raw=true)
+![image4](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.00.42.png?raw=true)
 
 16. What is the quantity of blue parts supplied by each supplier?
 
