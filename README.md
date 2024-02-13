@@ -31,7 +31,7 @@ Foreign keys: {actornr} (from ACTORS), {filmnr} (from FILM)
 
 1. Ge en lista på de kurser (namn, nummer) som ger mer än 3 poäng
 
-![image13]()
+![image13](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.23.48.png?raw=true)
 
 $\Pi _{CourseName, CourseNumber} (\sigma _{CreditHours > 3} (COURSE))$
 
@@ -42,6 +42,8 @@ WHERE CreditHours > 3;
 ```
 
 2. Ge en lista på de kurser (nummer) som gavs hösten 98
+
+![image14](https://github.com/niuniu268/Database1/blob/master/imgs/Screenshot%202024-02-13%20at%2009.23.54.png?raw=true)
 
 $\Pi _{CourseNumber} (\sigma _{Semester = 'Fall' \cap Year = 98} (SECTION))$
 ```
